@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Preload, useGLTF } from '@react-three/drei'
 import CanvasLoader from '../Loader'
 
-const MODEL_PATH = '/planet/scene.gltf'
+const MODEL_PATH = '/Faria1/planet/scene.gltf'
 
 const EarthModel = () => {
   const { scene } = useGLTF(MODEL_PATH)
