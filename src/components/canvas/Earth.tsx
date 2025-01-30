@@ -1,13 +1,32 @@
 import { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Preload, useGLTF } from '@react-three/drei'
+import ErrorBoundary from '../ErrorBoundary'
 import CanvasLoader from '../Loader'
 
-const Earth = () => {
-  const earth = useGLTF('/planet/scene.gltf')
+const MODEL_PATH = '/Faria1/planet/scene.gltf'
+
+// Pre-load the model
+useGLTF.preload(MODEL_PATH)
+
+const EarthModel = () => {
+  const { scene } = useGLTF(MODEL_PATH)
 
   return (
-    <primitive object={earth.scene} scale={2.5} position-y={0} rotation-y={0} />
+    <primitive 
+      object={scene} 
+      scale={2.5} 
+      position-y={0} 
+      rotation-y={0} 
+    />
+  )
+}
+
+const Earth = () => {
+  return (
+    <ErrorBoundary fallback={<div>Error loading Earth model</div>}>
+      <EarthModel />
+    </ErrorBoundary>
   )
 }
 
@@ -16,7 +35,6 @@ const EarthCanvas = () => {
     <Canvas
       shadows
       frameloop='demand'
-      dpr={[1, 2]}
       gl={{ preserveDrawingBuffer: true }}
       camera={{
         fov: 45,
@@ -25,16 +43,18 @@ const EarthCanvas = () => {
         position: [-4, 3, 6],
       }}
     >
-      <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls
-          autoRotate
-          enableZoom={false}
-          maxPolarAngle={Math.PI / 2}
-          minPolarAngle={Math.PI / 2}
-        />
-        <Earth />
-        <Preload all />
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense fallback={<CanvasLoader />}>
+          <OrbitControls
+            autoRotate
+            enableZoom={false}
+            maxPolarAngle={Math.PI / 2}
+            minPolarAngle={Math.PI / 2}
+          />
+          <Earth />
+        </Suspense>
+      </ErrorBoundary>
+      <Preload all />
     </Canvas>
   )
 }
