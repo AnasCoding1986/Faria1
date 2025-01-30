@@ -1,34 +1,33 @@
-import { useState } from 'react'
-import { BrowserRouter } from 'react-router-dom'
-import { Navbar, Hero, About, Experience, Tech, Works, Contact, StarsCanvas } from './components'
+import { HashRouter } from 'react-router-dom'
+import {
+  About,
+  Contact,
+  Experience,
+  Hero,
+  Navbar,
+  Tech,
+  Works,
+  StarsCanvas,
+} from './components'
 
-function App() {
-  const [darkMode, setDarkMode] = useState(false)
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode)
-    document.documentElement.classList.toggle('dark')
-  }
-
+const App = () => {
   return (
-    <BrowserRouter>
-      <div className={`relative z-0 ${darkMode ? 'dark' : ''}`}>
-        <div className='bg-primary dark:bg-white transition-colors duration-300'>
-          <div className='bg-hero-pattern bg-cover bg-no-repeat bg-center'>
-            <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-            <Hero />
-          </div>
-          <About />
-          <Experience />
-          <Tech />
-          <Works />
-          <div className='relative z-0'>
-            <Contact />
-            <StarsCanvas />
-          </div>
+    <HashRouter>
+      <div className='relative z-0 bg-primary'>
+        <div className='bg-hero-pattern bg-cover bg-no-repeat bg-center'>
+          <Navbar />
+          <Hero />
+        </div>
+        <About />
+        <Experience />
+        <Tech />
+        <Works />
+        <div className='relative z-0'>
+          <Contact />
+          <StarsCanvas />
         </div>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
