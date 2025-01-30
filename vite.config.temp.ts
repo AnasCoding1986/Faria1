@@ -16,5 +16,17 @@ export default defineConfig({
     typescript: {
       ignoreBuildErrors: true,
     },
+    // Improve chunk splitting
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return 'vendor'
+          }
+        }
+      }
+    },
+    // Increase chunk size warning limit
+    chunkSizeWarningLimit: 1000,
   },
 })
