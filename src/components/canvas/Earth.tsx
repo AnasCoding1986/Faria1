@@ -4,27 +4,34 @@ import { OrbitControls, Preload, useGLTF } from '@react-three/drei'
 import ErrorBoundary from '../ErrorBoundary'
 import CanvasLoader from '../Loader'
 
-const MODEL_PATH = '/Faria1/planet/scene.gltf'
-
-// Pre-load the model
-useGLTF.preload(MODEL_PATH)
+const MODEL_PATH = '/planet/scene.gltf'
 
 const EarthModel = () => {
-  const { scene } = useGLTF(MODEL_PATH)
+  try {
+    const { scene } = useGLTF(MODEL_PATH)
 
-  return (
-    <primitive 
-      object={scene} 
-      scale={2.5} 
-      position-y={0} 
-      rotation-y={0} 
-    />
-  )
+    return (
+      <primitive 
+        object={scene} 
+        scale={2.5} 
+        position-y={0} 
+        rotation-y={0} 
+      />
+    )
+  } catch (err) {
+    console.error('Failed to load Earth model:', err)
+    return null
+  }
 }
 
 const Earth = () => {
   return (
-    <ErrorBoundary fallback={<div>Error loading Earth model</div>}>
+    <ErrorBoundary fallback={
+      <div style={{ color: 'white', textAlign: 'center', padding: '20px' }}>
+        <h3>Failed to load Earth model</h3>
+        <p>Please check your internet connection and refresh the page</p>
+      </div>
+    }>
       <EarthModel />
     </ErrorBoundary>
   )
@@ -35,7 +42,7 @@ const EarthCanvas = () => {
     <Canvas
       shadows
       frameloop='demand'
-      gl={{ preserveDrawingBuffer: true }}
+      gl={{ preserveDrawingBuffer: true, alpha: true }}
       camera={{
         fov: 45,
         near: 0.1,

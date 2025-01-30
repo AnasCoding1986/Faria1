@@ -4,39 +4,46 @@ import { OrbitControls, Preload, useGLTF } from '@react-three/drei'
 import ErrorBoundary from '../ErrorBoundary'
 import CanvasLoader from '../Loader'
 
-const MODEL_PATH = '/Faria1/desktop_pc/scene.gltf'
-
-// Pre-load the model
-useGLTF.preload(MODEL_PATH)
+const MODEL_PATH = '/desktop_pc/scene.gltf'
 
 const ComputerModel = ({ isMobile }: { isMobile: boolean }) => {
-  const { scene } = useGLTF(MODEL_PATH)
+  try {
+    const { scene } = useGLTF(MODEL_PATH)
 
-  return (
-    <mesh>
-      <hemisphereLight intensity={0.15} groundColor='black' />
-      <spotLight
-        position={[-20, 50, 10]}
-        angle={0.12}
-        penumbra={1}
-        intensity={1}
-        castShadow
-        shadow-mapSize={1024}
-      />
-      <pointLight intensity={1} />
-      <primitive
-        object={scene}
-        scale={isMobile ? 0.7 : 0.75}
-        position={isMobile ? [0, -3, -2.2] : [0, -3.25, -1.5]}
-        rotation={[-0.01, -0.2, -0.1]}
-      />
-    </mesh>
-  )
+    return (
+      <mesh>
+        <hemisphereLight intensity={0.15} groundColor='black' />
+        <spotLight
+          position={[-20, 50, 10]}
+          angle={0.12}
+          penumbra={1}
+          intensity={1}
+          castShadow
+          shadow-mapSize={1024}
+        />
+        <pointLight intensity={1} />
+        <primitive
+          object={scene}
+          scale={isMobile ? 0.7 : 0.75}
+          position={isMobile ? [0, -3, -2.2] : [0, -3.25, -1.5]}
+          rotation={[-0.01, -0.2, -0.1]}
+        />
+      </mesh>
+    )
+  } catch (err) {
+    console.error('Failed to load computer model:', err)
+    return null
+  }
 }
 
 const Computers = ({ isMobile }: { isMobile: boolean }) => {
   return (
-    <ErrorBoundary fallback={<div>Error loading 3D model</div>}>
+    <ErrorBoundary fallback={
+      <div style={{ color: 'white', textAlign: 'center', padding: '20px' }}>
+        <h3>Failed to load 3D model</h3>
+        <p>Please check your internet connection and refresh the page</p>
+      </div>
+    }>
       <ComputerModel isMobile={isMobile} />
     </ErrorBoundary>
   )
@@ -60,9 +67,8 @@ const ComputersCanvas = () => {
     <Canvas
       frameloop='demand'
       shadows
-      dpr={[1, 2]}
       camera={{ position: [20, 3, 5], fov: 25 }}
-      gl={{ preserveDrawingBuffer: true }}
+      gl={{ preserveDrawingBuffer: true, alpha: true }}
     >
       <ErrorBoundary>
         <Suspense fallback={<CanvasLoader />}>
