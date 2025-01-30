@@ -1,13 +1,9 @@
 import { Suspense, useEffect, useState, useCallback } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Preload, useGLTF } from '@react-three/drei'
+import { OrbitControls, Preload } from '@react-three/drei'
 import CanvasLoader from '../Loader'
 
-const MODEL_PATH = '/Faria1/desktop_pc/scene.gltf'
-
 const ComputerModel = ({ isMobile }: { isMobile: boolean }) => {
-  const { scene } = useGLTF(MODEL_PATH)
-
   return (
     <mesh>
       <hemisphereLight intensity={0.15} groundColor='black' />
@@ -20,12 +16,12 @@ const ComputerModel = ({ isMobile }: { isMobile: boolean }) => {
         shadow-mapSize={1024}
       />
       <pointLight intensity={1} />
-      <primitive
-        object={scene}
-        scale={isMobile ? 0.7 : 0.75}
-        position={isMobile ? [0, -3, -2.2] : [0, -3.25, -1.5]}
-        rotation={[-0.01, -0.2, -0.1]}
-      />
+      
+      {/* Simple box as placeholder */}
+      <mesh scale={isMobile ? 0.7 : 0.75} position={isMobile ? [0, -3, -2.2] : [0, -3.25, -1.5]}>
+        <boxGeometry args={[2, 2, 2]} />
+        <meshStandardMaterial color="#4444ff" />
+      </mesh>
     </mesh>
   )
 }
@@ -71,8 +67,5 @@ const ComputersCanvas = () => {
     </Canvas>
   )
 }
-
-// Preload the model
-useGLTF.preload(MODEL_PATH)
 
 export default ComputersCanvas
