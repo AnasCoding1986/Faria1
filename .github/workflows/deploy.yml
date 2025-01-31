@@ -50,27 +50,22 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
           echo "Deploying to Vercel..."
-          echo "Organization ID: ${VERCEL_ORG_ID}"
-          echo "Project ID: ${VERCEL_PROJECT_ID}"
           
-          # Authenticate with Vercel
-          vercel login --token=$VERCEL_TOKEN
-
+          # Set Vercel token for subsequent commands
+          echo "$VERCEL_TOKEN" > vercel_token.txt
+          
           # Link project
-          vercel link \
-            --token=$VERCEL_TOKEN \
-            --yes
+          vercel link --yes
 
           # Pull existing configuration
           vercel pull --yes \
-            --environment=production \
-            --token=$VERCEL_TOKEN
+            --environment=production
 
           # Build project
-          vercel build --token=$VERCEL_TOKEN
+          vercel build
 
           # Deploy
-          vercel deploy --prebuilt --token=$VERCEL_TOKEN
+          vercel deploy --prebuilt
 
       - name: Create Deployment Artifact
         uses: actions/upload-artifact@v4
