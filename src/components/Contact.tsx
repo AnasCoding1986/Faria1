@@ -56,7 +56,7 @@ const Contact = () => {
   }
 
   return (
-    <div className='xl:mt-12 xl:flex-row flex-col-reverse flex gap-10 overflow-hidden'>
+    <div id="contact" className='xl:mt-12 xl:flex-row flex-col-reverse flex gap-10 overflow-hidden'>
       <motion.div
         variants={slideIn('left', 'tween', 0.2, 1)}
         className='flex-[0.75] bg-black-100 dark:bg-white p-8 rounded-2xl'
@@ -105,7 +105,7 @@ const Contact = () => {
 
           <button
             type='submit'
-            className='bg-tertiary dark:bg-primary py-3 px-8 outline-none w-fit text-white dark:text-white font-bold shadow-md shadow-primary rounded-xl'
+            className='bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary'
           >
             {loading ? 'Sending...' : 'Send'}
           </button>

@@ -1,10 +1,25 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
   base: '/Faria1/',
+  plugins: [react()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+      'three': 'three',
+      '@react-three/fiber': '@react-three/fiber',
+      '@react-three/drei': '@react-three/drei',
+      'maath': 'maath'
+    }
+  },
+  optimizeDeps: {
+    include: ['three', '@react-three/fiber', '@react-three/drei', 'maath'],
+    force: true
+  },
+  publicDir: 'public',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
@@ -23,11 +38,5 @@ export default defineConfig({
         }
       }
     }
-  },
-  resolve: {
-    alias: {
-      '@': '/src'
-    }
-  },
-  publicDir: 'public'
+  }
 })

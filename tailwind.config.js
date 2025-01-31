@@ -4,7 +4,6 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -24,6 +23,25 @@ export default {
       backgroundImage: {
         "hero-pattern": "url('/src/assets/herobg.png')",
       },
+      fontFamily: {
+        // Classic serif font for headings
+        'heading': ['Playfair Display', 'Georgia', 'serif'],
+        // Elegant sans-serif for body text
+        'body': ['Lato', 'Roboto', 'sans-serif'],
+        // Sophisticated script for special accents
+        'accent': ['Cormorant Garamond', 'Baskerville', 'serif']
+      },
+      fontSize: {
+        // Slightly larger base sizes for better readability
+        'base': '1.125rem',
+        'lg': '1.25rem',
+        'xl': '1.5rem',
+      },
+      letterSpacing: {
+        // Refined letter spacing for classic feel
+        'wider': '0.05em',
+        'widest': '0.1em'
+      }
     },
   },
   plugins: [],
