@@ -1,4 +1,4 @@
-name: Vercel Deployment
+name: Netlify Deployment
 
 on:
   push:
@@ -19,16 +19,15 @@ jobs:
           node-version: '18'
           cache: 'npm'
 
-      - name: Install Vercel CLI and Project Dependencies
+      - name: Install Dependencies
         run: |
-          npm install -g vercel@latest
           npm install
           npm install fs-extra
           echo "Dependencies installed successfully"
 
-      - name: Verify Copy Models Script
+      - name: Prepare 3D Model Placeholders
         run: |
-          node --experimental-modules copy-models.js || {
+          node copy-models.js || {
             echo "Copy models script failed"
             exit 1
           }
@@ -43,30 +42,16 @@ jobs:
           echo "Build completed successfully"
           ls -lR dist
 
-      - name: Vercel Deployment
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v2.0
+        with:
+          publish-dir: './dist'
+          production-branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy from GitHub Actions"
         env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-        run: |
-          echo "Deploying to Vercel..."
-          
-          # Authenticate and set up Vercel project
-          vercel login --token="$VERCEL_TOKEN"
-          
-          # Link project with explicit token
-          vercel link --yes --token="$VERCEL_TOKEN"
-
-          # Pull project configuration
-          vercel pull --yes \
-            --environment=production \
-            --token="$VERCEL_TOKEN"
-
-          # Build project
-          vercel build --token="$VERCEL_TOKEN"
-
-          # Deploy project
-          vercel deploy --prebuilt --token="$VERCEL_TOKEN"
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 
       - name: Create Deployment Artifact
         uses: actions/upload-artifact@v4
