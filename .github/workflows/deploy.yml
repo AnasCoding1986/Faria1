@@ -49,8 +49,26 @@ jobs:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
-          vercel pull --yes --environment=production --token=$VERCEL_TOKEN
+          echo "Deploying to Vercel..."
+          echo "Organization ID: ${VERCEL_ORG_ID}"
+          echo "Project ID: ${VERCEL_PROJECT_ID}"
+          
+          # Link project if not already linked
+          vercel link --yes \
+            --token=$VERCEL_TOKEN \
+            --org=$VERCEL_ORG_ID \
+            --project-id=$VERCEL_PROJECT_ID \
+            --confirm
+
+          # Pull existing configuration
+          vercel pull --yes \
+            --environment=production \
+            --token=$VERCEL_TOKEN
+
+          # Build project
           vercel build --token=$VERCEL_TOKEN
+
+          # Deploy
           vercel deploy --prebuilt --token=$VERCEL_TOKEN
 
       - name: Create Deployment Artifact
