@@ -19,21 +19,47 @@ jobs:
           node-version: '18'
           cache: 'npm'
 
+      - name: Display Environment Information
+        run: |
+          echo "Node version:"
+          node --version
+          echo "NPM version:"
+          npm --version
+          echo "Current directory contents:"
+          ls -la
+
       - name: Install Dependencies
         run: |
           npm install
-          npm install fs-extra
+          npm list || true
           echo "Dependency installation completed"
+
+      - name: Run Copy Models Script
+        run: |
+          node copy-models.js || echo "Copy models script failed"
 
       - name: Lint Code
         continue-on-error: true
-        run: npm run lint
+        run: |
+          npm run lint || echo "Linting encountered warnings"
 
       - name: Build Project
         run: |
-          npm run build
-          echo "Build completed successfully"
-          ls -R dist
+          npm run build || {
+            echo "Build failed"
+            echo "Current directory:"
+            pwd
+            echo "Directory contents:"
+            ls -la
+            echo "Checking package.json:"
+            cat package.json
+            exit 1
+          }
+
+      - name: Debug Build Output
+        run: |
+          echo "Dist directory contents:"
+          ls -lR dist || echo "No dist directory found"
 
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v25
@@ -50,3 +76,8 @@ jobs:
           name: build-artifact
           path: dist
           retention-days: 5
+
+      - name: Final Status Check
+        if: always()
+        run: |
+          echo "Workflow completed. Check previous steps for detailed logs."

@@ -6,26 +6,48 @@ const __dirname = path.dirname(__filename);
 
 async function copyModels() {
   try {
-    // Create the directories if they don't exist
-    await fs.ensureDir(path.join(__dirname, 'public', 'desktop_pc'));
-    await fs.ensureDir(path.join(__dirname, 'public', 'planet'));
+    console.log('Starting 3D model placeholder creation...');
+    
+    const baseDir = __dirname;
+    console.log(`Base directory: ${baseDir}`);
 
-    // Create placeholder files if models don't exist
+    const publicDir = path.join(baseDir, 'public');
+    const desktopPcDir = path.join(publicDir, 'desktop_pc');
+    const planetDir = path.join(publicDir, 'planet');
+
+    console.log(`Ensuring directories exist...`);
+    await fs.ensureDir(publicDir);
+    await fs.ensureDir(desktopPcDir);
+    await fs.ensureDir(planetDir);
+
     const placeholderContent = 'This is a placeholder for the 3D model.';
     
+    console.log(`Creating placeholder files...`);
     await fs.writeFile(
-      path.join(__dirname, 'public', 'desktop_pc', 'scene.gltf'),
+      path.join(desktopPcDir, 'scene.gltf'),
       placeholderContent
     );
 
     await fs.writeFile(
-      path.join(__dirname, 'public', 'planet', 'scene.gltf'),
+      path.join(planetDir, 'scene.gltf'),
       placeholderContent
     );
+
+    console.log('Verifying created files...');
+    const desktopPcFiles = await fs.readdir(desktopPcDir);
+    const planetFiles = await fs.readdir(planetDir);
+
+    console.log('Desktop PC directory files:', desktopPcFiles);
+    console.log('Planet directory files:', planetFiles);
 
     console.log('3D model placeholders created successfully!');
   } catch (err) {
     console.error('Error creating 3D model placeholders:', err);
+    console.error('Error details:', {
+      message: err.message,
+      stack: err.stack,
+      code: err.code
+    });
     process.exit(1);
   }
 }
