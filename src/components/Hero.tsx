@@ -166,7 +166,9 @@ const Hero = () => {
             transition-transform duration-500 
             group-hover:scale-110 
             group-hover:rotate-3 
-            group-hover:brightness-90'
+            group-hover:brightness-90 
+            group-hover:grayscale-50 
+            group-hover:contrast-150'
           />
           <div className='absolute inset-0 bg-tertiary/30 opacity-0 
           group-hover:opacity-100 
