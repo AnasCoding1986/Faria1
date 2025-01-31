@@ -19,17 +19,19 @@ jobs:
           node-version: '18'
           cache: 'npm'
 
-      - name: Install Vercel CLI
-        run: npm install -g vercel@latest
-
-      - name: Install Project Dependencies
+      - name: Install Vercel CLI and Project Dependencies
         run: |
+          npm install -g vercel@latest
           npm install
+          npm install fs-extra
           echo "Dependencies installed successfully"
 
-      - name: Run Copy Models Script
+      - name: Verify Copy Models Script
         run: |
-          node copy-models.js || echo "Copy models script may have failed"
+          node --experimental-modules copy-models.js || {
+            echo "Copy models script failed"
+            exit 1
+          }
 
       - name: Lint Code
         continue-on-error: true
