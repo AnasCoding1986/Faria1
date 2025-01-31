@@ -53,12 +53,13 @@ jobs:
           echo "Organization ID: ${VERCEL_ORG_ID}"
           echo "Project ID: ${VERCEL_PROJECT_ID}"
           
-          # Link project if not already linked
-          vercel link --yes \
+          # Authenticate with Vercel
+          vercel login --token=$VERCEL_TOKEN
+
+          # Link project
+          vercel link \
             --token=$VERCEL_TOKEN \
-            --org=$VERCEL_ORG_ID \
-            --project-id=$VERCEL_PROJECT_ID \
-            --confirm
+            --yes
 
           # Pull existing configuration
           vercel pull --yes \
