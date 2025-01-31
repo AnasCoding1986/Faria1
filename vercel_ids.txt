@@ -1,0 +1,13 @@
+To find your Vercel Organization and Project IDs:
+
+1. Go to https://vercel.com/[your-username]/[your-project-name]/settings
+2. Look for "Project ID" 
+3. Look for "Team/Org ID"
+
+Paste those values in GitHub Secrets:
+- Name the Org ID secret: VERCEL_ORG_ID
+- Name the Project ID secret: VERCEL_PROJECT_ID
+
+If you can't find these, you can also get them by:
+- Running 'vercel link' in the project directory
+- Checking your Vercel dashboard project settings
