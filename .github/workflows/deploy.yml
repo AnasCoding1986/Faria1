@@ -25,11 +25,6 @@ jobs:
           npm install fs-extra
           echo "Dependency installation completed"
 
-      - name: Prepare 3D Model Placeholders
-        run: |
-          node copy-models.js
-          echo "3D model placeholders created"
-
       - name: Lint Code
         continue-on-error: true
         run: npm run lint
