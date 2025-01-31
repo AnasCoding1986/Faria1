@@ -22,14 +22,23 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install
+          npm install fs-extra
           echo "Dependency installation completed"
+
+      - name: Prepare 3D Model Placeholders
+        run: |
+          node copy-models.js
+          echo "3D model placeholders created"
 
       - name: Lint Code
         continue-on-error: true
         run: npm run lint
 
       - name: Build Project
-        run: npm run build
+        run: |
+          npm run build
+          echo "Build completed successfully"
+          ls -R dist
 
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v25
