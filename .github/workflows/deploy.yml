@@ -51,21 +51,22 @@ jobs:
         run: |
           echo "Deploying to Vercel..."
           
-          # Set Vercel token for subsequent commands
-          echo "$VERCEL_TOKEN" > vercel_token.txt
+          # Authenticate and set up Vercel project
+          vercel login --token="$VERCEL_TOKEN"
           
-          # Link project
-          vercel link --yes
+          # Link project with explicit token
+          vercel link --yes --token="$VERCEL_TOKEN"
 
-          # Pull existing configuration
+          # Pull project configuration
           vercel pull --yes \
-            --environment=production
+            --environment=production \
+            --token="$VERCEL_TOKEN"
 
           # Build project
-          vercel build
+          vercel build --token="$VERCEL_TOKEN"
 
-          # Deploy
-          vercel deploy --prebuilt
+          # Deploy project
+          vercel deploy --prebuilt --token="$VERCEL_TOKEN"
 
       - name: Create Deployment Artifact
         uses: actions/upload-artifact@v4
