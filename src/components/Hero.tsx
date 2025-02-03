@@ -122,7 +122,9 @@ const Hero = () => {
           </div>
 
           <p className={styles.heroSubText}>
-          Digital Marketing Strategist with a passion for driving business growth through innovative, data-driven marketing strategies. Experienced in enhancing online presence, optimizing campaigns, and delivering measurable results.
+          Strategic Digital Marketing Professional | Growth-Driven Innovator | Data-Informed Campaign Architect
+
+Seasoned Digital Marketing Strategist with a proven track record of leveraging data-driven insights to develop transformative marketing solutions. Specializes in crafting comprehensive digital strategies that optimize online presence, drive measurable business growth, and deliver exceptional ROI. Expert in translating complex market dynamics into actionable, high-impact marketing initiatives that align with core business objectives.
           </p>
 
           <div className='flex space-x-4'>
