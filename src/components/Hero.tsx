@@ -122,9 +122,7 @@ const Hero = () => {
           </div>
 
           <p className={styles.heroSubText}>
-            Digital Marketing Strategist passionate about helping businesses 
-            grow their online presence through innovative and data-driven 
-            marketing solutions.
+          Digital Marketing Strategist with a passion for driving business growth through innovative, data-driven marketing strategies. Experienced in enhancing online presence, optimizing campaigns, and delivering measurable results.
           </p>
 
           <div className='flex space-x-4'>
