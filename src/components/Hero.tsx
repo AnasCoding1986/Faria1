@@ -138,7 +138,7 @@ Seasoned Digital Marketing Strategist with a proven track record of leveraging d
                 shadow-md 
                 hover:shadow-lg'
             >
-              Hire Me
+              Contact Me
             </button>
             <a 
               href='#projects' 
