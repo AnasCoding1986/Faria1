@@ -60,21 +60,22 @@ const About = () => {
         className='mt-4 text-secondary text-[17px] max-w-6xl mx-auto leading-[30px] grid grid-cols-1 md:grid-cols-3 gap-10 items-center'
       >
         <div className='md:col-span-2 space-y-4'>
-          <p>
-            I'm a skilled Digital Marketing Strategist with a passion for crafting innovative 
-            online marketing solutions. With extensive experience in SEO, social media marketing, 
-            and content strategy, I help businesses enhance their digital presence and drive 
-            meaningful engagement.
+          <p className={`${styles.sectionSubText} text-secondary`}>
+            As a distinguished Digital Marketing Strategist, I specialize in architecting 
+            comprehensive digital marketing solutions that transcend conventional boundaries. 
+            My expertise encompasses advanced SEO methodologies, sophisticated social media 
+            marketing strategies, and nuanced content development.
           </p>
-          <p>
-            My approach combines data-driven insights with creative storytelling, ensuring 
-            that every marketing campaign not only reaches but resonates with the target audience. 
-            I thrive on transforming complex digital challenges into strategic opportunities.
+          <p className={`${styles.sectionSubText} text-secondary`}>
+            Synthesizing data-driven analytics with compelling narrative techniques, I craft 
+            marketing campaigns that not only capture attention but forge meaningful connections. 
+            My strategic approach transforms complex digital landscapes into strategic 
+            opportunities for brand elevation and audience engagement.
           </p>
-          <p>
-            Leveraging cutting-edge digital tools and analytics, I develop targeted strategies 
-            that maximize brand visibility, increase audience interaction, and drive measurable 
-            business growth.
+          <p className={`${styles.sectionSubText} text-secondary`}>
+            Utilizing state-of-the-art digital intelligence and advanced analytics, I design 
+            precision-targeted strategies that amplify brand presence, cultivate meaningful 
+            audience interactions, and drive substantive, measurable business growth.
           </p>
         </div>
 
