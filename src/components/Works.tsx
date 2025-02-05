@@ -83,10 +83,11 @@ const Works = () => {
           className='mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]'
         >
           Following projects showcases my skills and experience through real-world
-          examples of my work. Each project is briefly described with links to case
-          studies and live demos. It reflects my ability to solve complex digital
-          marketing challenges, work with different technologies, and manage
-          projects effectively.
+          examples of my work. Each project demonstrates my expertise in solving
+          complex digital challenges, leveraging cutting-edge technologies, and
+          delivering innovative solutions that drive meaningful business outcomes.
+          From conceptualization to implementation, these projects highlight my
+          ability to transform ideas into impactful digital experiences.
         </motion.p>
       </div>
 
