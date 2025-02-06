@@ -30,7 +30,7 @@ const ProjectCard = ({
     <motion.div variants={fadeIn('up', 'spring', index * 0.5, 0.75)}>
       <Tilt
         options={{ max: 45, scale: 1, speed: 450 }}
-        className='bg-tertiary dark:bg-white p-5 rounded-2xl sm:w-[360px] w-full'
+        className='bg-tertiary dark:bg-white p-5 rounded-2xl sm:w-[360px] w-full transition-all duration-300 hover:shadow-xl hover:scale-[1.02]'
       >
         <div className='relative w-full h-[230px]'>
           <img
@@ -82,12 +82,10 @@ const Works = () => {
           variants={fadeIn('', '', 0.1, 1)}
           className='mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]'
         >
-          Following projects showcases my skills and experience through real-world
-          examples of my work. Each project demonstrates my expertise in solving
-          complex digital challenges, leveraging cutting-edge technologies, and
-          delivering innovative solutions that drive meaningful business outcomes.
-          From conceptualization to implementation, these projects highlight my
-          ability to transform ideas into impactful digital experiences.
+          Following projects showcase my professional expertise through strategic digital solutions. 
+          Each project represents a comprehensive approach to solving complex challenges, 
+          demonstrating technical proficiency, innovative problem-solving, and the ability 
+          to deliver high-impact technological outcomes across diverse domains.
         </motion.p>
       </div>
 
